@@ -28,6 +28,4 @@ public class BrowserDriver {
         driver.quit();
     }
 
-
-
 }
