@@ -17,10 +17,12 @@ public class HomePageTest extends ApplicationBasePage {
 
     HomePage objHomePage;
 
+
     @BeforeMethod
     public void initElements(){
 
       objHomePage = PageFactory.initElements(driver, HomePage.class);
+
     }
 
     @Test

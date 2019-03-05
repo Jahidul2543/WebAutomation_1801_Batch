@@ -14,13 +14,14 @@ public class HomePage {
 
     public void clickSignIn(){
 
-      signIn.click();
+      //signIn.click();
+        ApplicationBasePage.click(signIn,"signIn" );
 
     }
 
     public boolean checkElementsStatus(){
 
-       boolean status = signIn.isDisplayed();
+       boolean status = ApplicationBasePage.isDisplayed(signIn, "signIn");
 
         return status;
     }

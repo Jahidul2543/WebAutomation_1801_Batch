@@ -21,9 +21,15 @@ public class SignInPage{
 
 
     public void login(){
-        emailBox.sendKeys("abcd@Ggmail.com");
-        password.sendKeys("123abcd");
-        submitButton.click();
+
+
+       // emailBox.sendKeys("abcd@Ggmail.com");
+        //password.sendKeys("123abcd");
+
+        ApplicationBasePage.sendKeys(emailBox,"emailBox","abcd@Ggmail.com" );
+        ApplicationBasePage.sendKeys(password, "password", "abcd");
+        ApplicationBasePage.click(submitButton, "submitButton");
+
 
     }
 
