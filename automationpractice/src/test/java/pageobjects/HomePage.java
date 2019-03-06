@@ -12,10 +12,13 @@ public class HomePage {
     private WebElement signIn;
 
 
-    public void clickSignIn(){
+    public void clickSignIn() {
+
+
 
       //signIn.click();
         ApplicationBasePage.click(signIn,"signIn" );
+
 
     }
 

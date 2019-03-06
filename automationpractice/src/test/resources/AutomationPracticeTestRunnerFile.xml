@@ -17,8 +17,6 @@
 
 <test name = "Ecommerc Home">
     <classes>
-
-
        <!-- <class name="test.page.objects.HomePageTest"/>
         <class name="test.page.objects.ContactUsPageTest"/>-->
        <!-- <class name="test.page.objects.LoginPageTest"/>-->
@@ -26,7 +24,5 @@
         <class name="tests.page.objects.SignInPageTest"/>
     </classes>
 
-
 </test>
-
 </suite>

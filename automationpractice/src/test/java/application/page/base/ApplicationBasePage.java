@@ -2,6 +2,8 @@ package application.page.base;
 
 import base.BrowserDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import reporting.TestLogger;
 
 public class ApplicationBasePage extends BrowserDriver {
@@ -15,9 +17,7 @@ public class ApplicationBasePage extends BrowserDriver {
    public static boolean isDisplayed(WebElement element, String elemtntName){
 
        TestLogger.log("Checking " + elemtntName);
-
        boolean status = element.isDisplayed();
-
        return status;
    }
 
@@ -37,6 +37,13 @@ public class ApplicationBasePage extends BrowserDriver {
         TestLogger.log("Clicked " + webElementName);
     }
 
+    /**
+     * Explicitly wait
+     * */
+    public static void waitUntilElementIsVisible(WebElement element, int waitTime ){
 
+        WebDriverWait wait = new WebDriverWait(driver, waitTime);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
 
 }

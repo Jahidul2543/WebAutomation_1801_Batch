@@ -33,15 +33,6 @@ public class HomePageTest extends ApplicationBasePage {
         // Hard Assertion
         Assert.assertEquals(status, true);
 
-
-
-
-
-
-
-
     }
-
-
 
 }

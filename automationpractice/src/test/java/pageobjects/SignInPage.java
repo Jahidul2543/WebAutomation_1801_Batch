@@ -11,7 +11,7 @@ public class SignInPage{
     private WebElement emailBox ;
 
     @FindBy(id = "passwd")
-    private WebElement password;
+    private WebElement passwordBox;
 
     @FindBy(name = "SubmitLogin")
     private WebElement submitButton;
@@ -20,24 +20,26 @@ public class SignInPage{
     private WebElement errorMessage;
 
 
-    public void login(){
+    public void login(String email, String password){
 
 
-       // emailBox.sendKeys("abcd@Ggmail.com");
+        // emailBox.sendKeys("abcd@Ggmail.com");
         //password.sendKeys("123abcd");
 
-        ApplicationBasePage.sendKeys(emailBox,"emailBox","abcd@Ggmail.com" );
-        ApplicationBasePage.sendKeys(password, "password", "abcd");
+        ApplicationBasePage.sendKeys(emailBox,"emailBox", email );
+        ApplicationBasePage.sendKeys(passwordBox, "password", password);
+
         ApplicationBasePage.click(submitButton, "submitButton");
 
 
     }
 
 
-    public void verifyErrorMessage(){
+    public String verifyErrorMessage(){
 
         String actualErrorMessage = errorMessage.getText();
-        Assert.assertEquals(actualErrorMessage, "There is 1 error");
+        return actualErrorMessage;
+
     }
 
 }

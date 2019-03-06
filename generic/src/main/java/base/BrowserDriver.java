@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 //import org.apache.maven.surefire.shade.org.apache.maven.shared.utils.io.FileUtils;
 
@@ -98,6 +99,14 @@ public class BrowserDriver {
         // ChromDriver Reference variable or object, in simple we say driver object
 
         getLocalDriver(browserName, os);
+
+         /**
+          * Implicitly wait (Conditional wait)
+          * */
+
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS); // 20
+        driver.manage().timeouts().pageLoadTimeout(45, TimeUnit.SECONDS); //35
+        //driver.manage().window().maximize();
 
         driver.get(url);
 
