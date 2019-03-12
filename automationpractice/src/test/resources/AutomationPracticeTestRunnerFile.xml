@@ -20,8 +20,9 @@
        <!-- <class name="test.page.objects.HomePageTest"/>
         <class name="test.page.objects.ContactUsPageTest"/>-->
        <!-- <class name="test.page.objects.LoginPageTest"/>-->
-        <class name="tests.page.objects.HomePageTest"/>
+       <!-- <class name="tests.page.objects.HomePageTest"/>-->
         <class name="tests.page.objects.SignInPageTest"/>
+      <!--  <class name="tests.page.objects.SignInUsingGoogleSheetAPI"/>-->
     </classes>
 
 </test>

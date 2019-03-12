@@ -13,12 +13,8 @@ public class HomePage {
 
 
     public void clickSignIn() {
-
-
-
       //signIn.click();
         ApplicationBasePage.click(signIn,"signIn" );
-
 
     }
 
