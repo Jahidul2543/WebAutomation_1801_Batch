@@ -43,7 +43,7 @@ public class SignInPageTest extends ApplicationBasePage {
 
     }
 
-    @Test (dataProvider = "testData")
+   /* @Test (dataProvider = "testData")
     public void invalidCredentialTest(String email, String password, String expectedErroMessage){
 
         objHomePage.clickSignIn();
@@ -54,6 +54,18 @@ public class SignInPageTest extends ApplicationBasePage {
 
         Assert.assertEquals(actualErrorMessage, expectedErroMessage);
 
-    }
+    }*/
 
+    @Test (dataProvider = "testData")
+    public void invalidCredentialTest(String email, String password, String expectedErroMessage){
+
+        objHomePage.clickSignIn();
+
+        objSignInPage.loginUsingListOfElements(email, password);
+
+        String actualErrorMessage = objSignInPage.verifyErrorMessage();
+
+        Assert.assertEquals(actualErrorMessage, expectedErroMessage);
+
+    }
 }

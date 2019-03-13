@@ -25,7 +25,7 @@ public class HomePageTest extends ApplicationBasePage {
 
     }
 
-    @Test
+    @Test(invocationCount = 2)
     public void checkElements(){
 
         boolean status = objHomePage.checkElementsStatus();

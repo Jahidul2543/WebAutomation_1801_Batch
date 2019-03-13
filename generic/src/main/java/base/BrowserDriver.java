@@ -11,15 +11,18 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import reporting.ExtentManager;
 import reporting.ExtentTestManager;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -88,17 +91,57 @@ public class BrowserDriver {
 
     public static WebDriver driver = null;
 
+    /**
+     * Browserstack Credentials
+     *
+     * */
+
+   // public static String   os = System.getProperty("os", "windows");
+    public static final String browserstack_username = System.getProperty("bsUName");
+    public static final String browserstack_automateKey = System.getProperty("bsSecretKey");
 
 
-    @Parameters({"browserName", "os","url"})
+
+    /**
+     *
+     * Saucelab Credentials
+     *
+     * */
+    public static final String saucelabs_username = null;
+    public static final String saucelabs_accesskey = null;
+
+
+
+
+    @Parameters({"browserName", "os","url","useCloudEnv","cloudEnvName", "os_version","browserVersion"})
     @BeforeMethod
-    public void setUp(@Optional("chrome") String browserName, @Optional("windows") String os, @Optional ("https://www.google.com/") String url ){
+    public void setUp(@Optional("chrome") String browserName, @Optional("windows") String os, @Optional ("https://www.google.com/") String url ,
+                      @Optional("false") boolean useCloudEnv,@Optional("saucelabs" ) String cloudEnvName, @Optional("7") String os_version,
+                      @Optional("62") String browserVersion ) throws IOException {
+
+       if(useCloudEnv==true){
+
+           if (cloudEnvName.equalsIgnoreCase("browserstack")) {
+               getCloudDriver(cloudEnvName, browserstack_username, browserstack_automateKey, os, os_version, browserName, browserVersion);
+           }
+           else if (cloudEnvName.equalsIgnoreCase("saucelabs")) {
+               getCloudDriver(cloudEnvName, saucelabs_username, saucelabs_accesskey, os, os_version, browserName, browserVersion);
+           }
+
+       }
+
+       else{
+
+           getLocalDriver(browserName, os);
+
+
+       }
+
 
 
 
         // ChromDriver Reference variable or object, in simple we say driver object
 
-        getLocalDriver(browserName, os);
 
          /**
           * Implicitly wait (Conditional wait)
@@ -179,6 +222,29 @@ public class BrowserDriver {
         return driver;
     }
 
+
+    public WebDriver getCloudDriver(String envName, String envUsername, String envAccessKey, String os, String os_version, String browserName,
+                                    String browserVersion) throws IOException {
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("browser", browserName);
+        caps.setCapability("browser_version", browserVersion);
+        caps.setCapability("os", os);
+        caps.setCapability("os_version", os_version);
+
+        // WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
+
+        if (envName.equalsIgnoreCase("Saucelabs")) {
+            driver = new RemoteWebDriver(new URL("http://" + envUsername + ":" + envAccessKey + "@ondemand.saucelabs.com:80/wd/hub"), caps);
+
+        } else if (envName.equalsIgnoreCase("Browserstack")) {
+
+            caps.setCapability("resolution", "1024x768");
+            //  public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+            driver = new RemoteWebDriver(new URL("https://" + envUsername + ":" + envAccessKey + "@hub-cloud.browserstack.com/wd/hub"), caps);
+        }
+        return driver;
+    }
 
 
 

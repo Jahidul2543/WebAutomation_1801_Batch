@@ -43,7 +43,9 @@ public class ApplicationBasePage extends BrowserDriver {
     public static void waitUntilElementIsVisible(WebElement element, int waitTime ){
 
         WebDriverWait wait = new WebDriverWait(driver, waitTime);
+
         wait.until(ExpectedConditions.invisibilityOf(element));
+
     }
 
 }
